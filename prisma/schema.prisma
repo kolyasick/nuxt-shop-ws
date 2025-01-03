@@ -28,7 +28,9 @@ model Product {
   image_url   String
   price       Float
   description String?
+  category_id Int
 
+  category    Category      @relation(fields: [category_id], references: [id])
   order_products OrderItem[]
 }
 
@@ -58,4 +60,10 @@ model OrderItem {
 
   order       Order    @relation(fields: [order_id], references: [id])
   product     Product  @relation(fields: [product_id], references: [id])
+}
+
+model Category {
+  id          Int      @id @default(autoincrement())
+  products Product[]
+  title String
 }

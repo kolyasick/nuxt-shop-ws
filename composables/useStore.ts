@@ -6,14 +6,16 @@ export interface ICartProduct extends Product {
 
 interface IStore {
 	cart: ICartProduct[]
+	products: Product[]
 }
 
 const state = reactive<IStore>({
 	cart: [],
+	products: [],
 })
 
 export default () => {
-	const { cart } = toRefs(state)
+	const { cart, products } = toRefs(state)
 
 	onMounted(() => {
 		const localCart = localStorage.getItem("cart")
@@ -32,5 +34,6 @@ export default () => {
 
 	return {
 		cart,
+		products,
 	}
 }
